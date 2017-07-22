@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html class='no-js' lang='en'>
+  <head>
+    <meta charset='utf-8'>
+    <meta content='IE=edge,chrome=1' http-equiv='X-UA-Compatible'>
+    <title>Virtual Agent</title>
+    <meta content='lab2023' name='author'>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+       {% load static %}
+    <link href="{% static 'css/application-a07755f5.css' %}" rel="stylesheet" type="text/css" />
+    <link href="favicon_.ico" rel="icon" type="image/ico" />
+
+  </head>
+<body class='main page'>
+    <!-- Navbar -->
+<div class='navbar navbar-default' id='navbar'>
+      <a class='navbar-brand' href='#'>
+        <i class='icon-beer'></i>
+        <font size="+3"><b>Virtual Agent</b></font>
+      </a>
+      <ul class='nav navbar-nav pull-right'>
+        <li class='dropdown'>
+        </li>
+        <li>
+          <a href="{% url 'logout' %}">
+            <i class='glyphicon glyphicon-off'></i>
+            Logout
+          </a>
+        </li>
+        <li class='dropdown user'>
+          <a class='dropdown-toggle' data-toggle='dropdown' href="#">
+            <i class='icon-user'></i>
+            <strong>{{request.user.get_full_name}}</strong>
+            <img class="img-rounded" src="http://placehold.it/20x20/ccc/777" />
+            <b class='caret'></b>
+          </a>
+          <ul class='dropdown-menu'>
+            <li>
+              <a href='#'>Edit Profile</a>
+            </li>
+            <li class='divider'></li>
+            <li>
+              <a href="/">Sign out</a>
+            </li>
+          </ul>
+        </li>
+      </ul>
+</div>
+  <div id='wrapper'>
+    <!-- Sidebar -->
+    <section id='sidebar'>
+      <i class='glyphicon glyphicon-align-justify' id='toggle'></i>
+      <ul id='dock'>
+        <li class='active launcher'>
+          <i class='icon-dashboard'></i>
+          <a href="dashboard.html">Dashboard</a>
+        </li>
+        <li class='launcher'>
+          <i class='icon-file-text-alt'></i>
+          <a href="forms.html">Forms</a>
+        </li>
+        <li class='launcher'>
+          <i class='icon-table'></i>
+          <a href="tables.html">Tables</a>
+        </li>
+        <li class='launcher dropdown hover'>
+          <i class='icon-flag'></i>
+          <a href='#'>Reports</a>
+          <ul class='dropdown-menu'>
+            <li class='dropdown-header'>Launcher description</li>
+            <li>
+              <a href='#'>Action</a>
+            </li>
+            <li>
+              <a href='#'>Another action</a>
+            </li>
+            <li>
+              <a href='#'>Something else here</a>
+            </li>
+          </ul>
+        </li>
+        <li class='launcher'>
+          <i class='icon-bookmark'></i>
+          <a href='#'>Bookmarks</a>
+        </li>
+        <li class='launcher'>
+          <i class='icon-cloud'></i>
+          <a href='#'>Backup</a>
+        </li>
+        <li class='launcher'>
+          <i class='icon-bug'></i>
+          <a href='#'>Feedback</a>
+        </li>
+      </ul>
+      <div data-toggle='tooltip' id='beaker' title='Made by lab2023'></div>
+    </section>
+    <!-- Tools -->
+    <section id='tools'>
+      <ul class='breadcrumb' id='breadcrumb'>
+        <li class='title'>Dashboard</li>
+
+      </ul>
+
+    </section>
+      {% block content %}
+      {% endblock %}
+</div>
+</body>
+</html>
