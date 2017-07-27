@@ -1,4 +1,4 @@
-{% extends 'registration/base.html' %}
+{% extends 'base.html' %}
 
       {% block content %}
       <!-- Content -->
@@ -24,10 +24,9 @@
             </div>
         <div>
 
-
                 <div align="center" class="col-sm-offset-2 col-sm-10">
 
-                    <a class="glyphicon glyphicon-plus btn btn-success" href="#">&nbsp; CREATE A BLANK CHATBOT</a>
+                    <a class="glyphicon glyphicon-plus btn btn-success" href="{% url 'createbot'%}">&nbsp; CREATE A BLANK CHATBOT  </a>
                  </div>
         </div>
       </div>

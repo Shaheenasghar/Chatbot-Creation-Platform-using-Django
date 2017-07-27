@@ -1,5 +1,5 @@
 from django.views import generic
-from fbbot.models import partner
+from fbbot.models import Partner
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login
@@ -9,15 +9,15 @@ from django.contrib.auth.decorators import login_required
 
 
 class IndexView(generic.ListView):
-    template_name = 'registration/home.html'
+    template_name = 'home.html'
 
     def get_queryset(self):
-        return partner.objects.all()
+        return Partner.objects.all()
 
 
 class UserFormView(View):
     form_class = UserForm
-    template_name = 'registration/customers_form.html'
+    template_name = 'registration_form.html'
 
     # display blank form
     def get(self, request):

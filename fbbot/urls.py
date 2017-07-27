@@ -1,6 +1,13 @@
 # FYPfinal/fbbot/urls.py
 from django.conf.urls import include, url
-from .views import FbBotView
+
+from . import views
+from .views import webhook
+
+
 urlpatterns = [
-                  url(r'^2e0caeed8c6d232e12fdad32358f2fa55eae03e92ca69731f2/?$', FbBotView.as_view())
-               ]
+        url(r'^webhook$', views.webhook, name='webhook'),
+        url(r'^newbot/$', views.BotCreate.as_view(), name='createbot'),
+        #url('^bots/(?P<username>.+)$', views.BotList.as_view()),
+]
+

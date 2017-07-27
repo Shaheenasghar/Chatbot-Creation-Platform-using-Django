@@ -20,13 +20,12 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # See https://docs.djangoproject.com/en/1.10/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = '62ma#%lhzb^%2wkdv#$ccel%*ls7i0q81jwjh)*jdxj7o3#zg%'
+SECRET_KEY = '5(15ds+i2+%ik6z&!yer+ga9m=e%jcqiz_5wszg)r-z!2--b2di-projectx'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['e4b40d24.ngrok.io']
-
+ALLOWED_HOSTS = ["*"]
 
 # Application definition
 
@@ -39,7 +38,47 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django.contrib.sites',
+    'rest_framework',
+#    'viewflow',
+    'django_celery_results',
+    'account',
+#user admin, password: password123
+    # do you have ngrok?yes copy https url
+    #'fobi',
+
+    # `django-fobi` themes
+    #'fobi.contrib.themes.bootstrap3', # Bootstrap 3 theme
+    #'fobi.contrib.themes.simple', # Bootstrap 3 theme
+
+
+    # `django-fobi` form elements - fields
+    #'fobi.contrib.plugins.form_elements.fields.boolean',
+    #'fobi.contrib.plugins.form_elements.fields.email',
+    #'fobi.contrib.plugins.form_elements.fields.integer',
+    #'fobi.contrib.plugins.form_elements.fields.password',
+    #'fobi.contrib.plugins.form_elements.fields.select',
+    #'fobi.contrib.plugins.form_elements.fields.text',
+
+    # `django-fobo` form handlers
+    #'fobi.contrib.plugins.form_handlers.db_store',
+    #'fobi.contrib.plugins.form_handlers.mail',
+
+    #'forms.apps.Config'
 ]
+
+REST_FRAMEWORK = {
+    'DEFAULT_RENDERER_CLASSES': (
+        'rest_framework.renderers.JSONRenderer',
+    ),
+    'DEFAULT_PARSER_CLASSES': (
+        'rest_framework.parsers.JSONParser',
+    ),
+    'DEFAULT_PERMISSION_CLASSES': (
+        'rest_framework.permissions.IsAdminUser',
+    ),
+    'PAGE_SIZE': 10
+}
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -49,14 +88,17 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    "account.middleware.LocaleMiddleware",
+    "account.middleware.TimezoneMiddleware",
 ]
 
 ROOT_URLCONF = 'FYP.urls'
 
+
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [os.path.join(BASE_DIR, 'templates/')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -64,13 +106,15 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                "account.context_processors.account",
+                #"pinax_theme_bootstrap.context_processors.theme",
+            #"fobi.context_processors.theme",
             ],
         },
     },
 ]
 
 WSGI_APPLICATION = 'FYP.wsgi.application'
-
 
 # Database
 # https://docs.djangoproject.com/en/1.10/ref/settings/#databases
@@ -81,7 +125,6 @@ DATABASES = {
         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
     }
 }
-
 
 # Password validation
 # https://docs.djangoproject.com/en/1.10/ref/settings/#auth-password-validators
@@ -115,6 +158,54 @@ USE_L10N = True
 
 USE_TZ = True
 
+# Facebook messenger bot
+
+FB_APP_ID = '1046417492160406'
+FB_PAGE_ID = '204027086778629'
+FB_ACCESS_TOKEN = 'EAAE66zsL7GoBAI4IGdeNWZBlhLyWV5ZC9uZClZCAwAsClS3c6hcUDYn0dZC4LmCJZAmtUHX4GmQRdes27soFhKtRM9W1ekqrI4Hdp4iaGhuZBN70h7cZC79BvD22SYaEse19oV9t4uYN1ZA6UTIPzW44M5qB2SJ7q7yYX1cxCqB61Ibm7UZB9knRG0'
+FB_APP_SECRET = 'b80401dc841ef794b7001a28ecff9d95'
+
+CELERY_RESULT_BACKEND = 'django-db'
+
+SITE_ID = 1
+
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+
+# FOBI forms configurations
+
+#FOBI_THEME_FOOTER_TEXT = 'Project X All rights reserved!'
+#INSTALLED_APPS.append('theme.apps.Config')
+#PROJECT_NAME = 'Project X: Forms'
+#FOBI_RESTRICT_PLUGIN_ACCESS = False
+
+
+#Logging
+
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    'handlers': {
+        'file': {
+            'level': 'DEBUG',
+            'class': 'logging.FileHandler',
+            'filename': 'E:\FYPfinal\debug.log', #update the file path point to your local dir
+        },
+    },
+    'loggers': {
+        'fbbot': {
+            'handlers': ['file'],
+            'level': 'DEBUG',
+            'propagate': True,
+        },
+        'forms': {
+            'handlers': ['file'],
+            'level': 'DEBUG',
+            'propagate': True,
+        },
+    },
+}
+
+
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.10/howto/static-files/
@@ -133,3 +224,4 @@ MEDIA_URL = '/media/'
 LOGIN_REDIRECT_URL = '/'
 
 LOGOUT_REDIRECT_URL = 'login'
+

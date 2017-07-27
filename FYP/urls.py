@@ -6,10 +6,10 @@ from django.contrib import admin
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
+    url(r'^fb_messenger/', include('fbbot.urls')),
     url(r'', include('registration.urls')),
     url(r'^accounts/', include('django.contrib.auth.urls')),
-    url(r'^fbbot/', include('fbbot.urls')),
-
+    url(r'^api_auth/', include('rest_framework.urls', namespace='rest_framework')),
 ]
 
 if settings.DEBUG:
