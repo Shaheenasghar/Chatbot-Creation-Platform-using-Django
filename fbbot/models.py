@@ -20,7 +20,9 @@ class Partner(models.Model):
     name = models.CharField(max_length=255)
     page_id = models.CharField(max_length=100)
     app_id = models.CharField(max_length=255)
+    secret = models.CharField(max_length=255)
     token = models.CharField(max_length=500)
+
 
     def __str__(self):
         return self.name

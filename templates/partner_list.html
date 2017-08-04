@@ -1,0 +1,8 @@
+<h1>Bots</h1>
+<ul>
+{% for partner in object_list %}
+    <li>{{ partner.id }} - {{ partner.user_id }} -  {{ partner.name }} -{{ partner.page_id }} - {{ partner.app_id }} - {{ partner.token }} - {{ partner.secret}}  <li>
+{% empty %}
+    <li>No bot yet.</li>
+{% endfor %}
+</ul>
